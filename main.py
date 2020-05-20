@@ -9,7 +9,7 @@ import os
 from selenium import webdriver
 import subprocess
 from subprocess import check_output
-output = check_output('netsh wlan connect 公管1075G', shell=True)
+output = check_output('netsh wlan connect 公管107', shell=True)
 print(output)
 time.sleep(5)
 
@@ -34,15 +34,21 @@ global musicDriver
 
 # print(socket.getfqdn(socket.gethostname()))
 
+# os.system("net use z: \\MYPASSPORT\Storage\showserver")
 
 
 def getList():
-    csv_data=pd.read_csv('https://raw.githubusercontent.com/HOOLoLo/webserver/master/content.csv')
-    print(csv_data)
+    # csv_data=pd.read_csv('https://raw.githubusercontent.com/HOOLoLo/webserver/master/content.csv')
+    csv_data=pd.read_csv(r'\\MYPASSPORT\Storage\showserver\content.csv')
+    # print(csv_data)
     for index,value in enumerate(csv_data['name']):
         dic[value]=csv_data['path'][index]
     print(dic)
 
+
+# paths = os.listdir('z:')
+# print(paths)
+getList()
 @app.route('/openChrome')
 def openChrome():
     global driver
@@ -123,3 +129,7 @@ if __name__=='__main__':
     ip=s.getsockname()[0]
     print(ip)
     app.run(host=ip,port=7777,debug=False)
+
+
+#复制命令：copy D:\Desktop\webserver\dist\main.exe D:\Desktop\webserver\ /Y
+#如果是正在运行的情况应该怎么搞
